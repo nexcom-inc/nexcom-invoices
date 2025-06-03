@@ -2,9 +2,31 @@
 
 import type React from "react"
 
-import Axiosinstance from "@/lib/axios"
 import { LoaderCircle } from "lucide-react"
 import { createContext, useContext, useEffect, useState } from "react"
+import axios from 'axios';
+
+
+
+const AxiosInstance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    headers: {
+      'Content-Type': 'application/json',
+      mode: 'no-cors'
+    },
+    withCredentials: true,
+  });
+
+AxiosInstance.interceptors.response.use(
+    response => response,
+    error => {
+        if (error.response.status === 401 || error.response.status === 403) {
+            window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`;
+        }
+        return Promise.reject(error);
+    }
+);
+
 
 type User = {
   id: number
@@ -17,18 +39,7 @@ type User = {
 type AuthContextType = {
   user: User | null
   isLoading: boolean
-  login: (email: string, password: string) => Promise<void>
-  register: (userData: RegisterData) => Promise<void>
   logout: () => Promise<void>
-}
-
-type RegisterData = {
-  email: string
-  password: string
-}
-
-type LoginResponse = {
-  message: string
 }
 
 type UserResponse = User
@@ -56,64 +67,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const fetchUserData = async (): Promise<User> => {
-    const data : UserResponse = (await Axiosinstance.get("/users/@me")).data
+    const data : UserResponse = (await AxiosInstance.get("/users/me")).data
     if (!data) {
       throw new Error("Failed to fetch user data")
     }
     return data
   }
 
-  const login = async (email: string, password: string) => {
-    setIsLoading(true)
-    try {
-
-      const data : LoginResponse = (await Axiosinstance.post("/auth/login", {
-        email,
-        password
-      })).data
-
-      
-
-      if (!data) {
-        throw new Error("Login failed")
-      }
-
-      const userData = await fetchUserData()
-      setUser(userData)
-    } catch (error) {
-      console.log("Login error:", error)
-      throw error
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const register = async (userData: RegisterData) => {
-    setIsLoading(true)
-    try {
-
-      const data = (await Axiosinstance.post("/auth/register", {
-        email: userData.email,
-        password: userData.password
-      })).data
-
-
-      if (!data) {
-        throw new Error("Registration failed")
-      }
-      return data
-    } catch (error) {
-      console.log("Registration error:", error)
-      throw error
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
   const logout = async () => {
     setIsLoading(true)
     try {
-     await Axiosinstance.post("/auth/logout")
+     await AxiosInstance.post("/auth/logout")
       setUser(null)
 
     } catch (error) {
@@ -135,8 +100,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         isLoading,
-        login,
-        register,
         logout,
       }}
     >

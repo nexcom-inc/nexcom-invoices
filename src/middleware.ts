@@ -8,9 +8,9 @@ export function middleware(request: NextRequest) {
   
 
 
-  // if (!token) {
-  //   return NextResponse.redirect(new URL(`http://localhost:3001/auth/login?next=${request.url}`, request.url))
-  // }
+  if (!token) {
+    return NextResponse.redirect(new URL(`http://localhost:8000/auth/login?next=${request.url}`, request.url))
+  }
 
   return NextResponse.next()
 }
