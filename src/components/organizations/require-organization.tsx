@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { useAuthStore } from "@/lib/nexcom/auth/stores/auth-store"
 import { useOrganizationStore } from "@/store/organization.store"
+import { useAppStore } from "@/store/app.store"
 
 interface RequireOrganizationProps {
   children: React.ReactNode
@@ -14,6 +15,7 @@ export const RequireOrganization = ({ children }: RequireOrganizationProps) => {
   const pathname = usePathname()
   
   const { isAuthenticated, hasCheckedAuth } = useAuthStore()
+  const { setLoadingPhase, setLoading } = useAppStore()
   const {
     currentOrganization,
     isLoading,
@@ -37,13 +39,26 @@ export const RequireOrganization = ({ children }: RequireOrganizationProps) => {
     }
 
     const handleOrganizationLogic = async () => {
+      setLoadingPhase('ORGANIZATION')
       const orgIdFromPath = getOrgIdFromPath(pathname)
+
+      // Cas spécial: quicksetup
+      if (pathname === "/quicksetup") {
+        await checkAndSetOrganization()
+        if (currentOrganization && currentOrganization.id) {
+          router.push(`/app/${currentOrganization.id}`)
+          return
+        }
+        setLoading(false)
+        return
+      }
       
-      // Cas 1: On est sur /app/[orgId]/*
+      // Cas 1: On est sur /app/[orgId]/* (avec ou sans sous-chemin)
       if (orgIdFromPath) {
         // Si on a une organisation en store et que l'ID correspond
         if (currentOrganization && currentOrganization.id === orgIdFromPath) {
-          return // Tout est bon
+          setLoading(false) // Tout est bon, on peut afficher le contenu
+          return
         }
         
         // Sinon, on doit vérifier que l'utilisateur a accès à cette organisation
@@ -52,7 +67,17 @@ export const RequireOrganization = ({ children }: RequireOrganizationProps) => {
           
           // Vérifier si l'organisation récupérée correspond à celle demandée
           if (currentOrganization && currentOrganization.id !== orgIdFromPath) {
-          router.push(`/app/${currentOrganization.id}`)
+            // L'orgId dans l'URL ne correspond pas à l'organisation de l'utilisateur
+            // Rediriger vers la bonne organisation en gardant le sous-chemin
+            const subPath = pathname.replace(/^\/app\/[^\/]+/, '') // Extraire le sous-chemin
+            const newPath = `/app/${currentOrganization.id}${subPath}`
+            router.push(newPath)
+            return
+          }
+          
+          // Si l'organisation correspond, on peut continuer
+          if (currentOrganization && currentOrganization.id === orgIdFromPath) {
+            setLoading(false)
             return
           }
           
@@ -62,6 +87,7 @@ export const RequireOrganization = ({ children }: RequireOrganizationProps) => {
             return
           }
         } catch (error) {
+          console.error('Erreur lors de la vérification de l\'organisation:', error)
           router.push("/quicksetup")
           return
         }
@@ -86,6 +112,7 @@ export const RequireOrganization = ({ children }: RequireOrganizationProps) => {
               return
             }
           } catch (error) {
+            console.error('Erreur lors de la récupération de l\'organisation par défaut:', error)
             // Pas d'organisation par défaut, rediriger vers quicksetup
             router.push("/quicksetup")
             return
@@ -101,57 +128,18 @@ export const RequireOrganization = ({ children }: RequireOrganizationProps) => {
         // Rediriger vers l'organisation
         router.push(`/app/${currentOrganization.id}`)
       }
-      // Cas 3: Autres routes sous /app
+      // Cas 3: Autres routes sous /app (routes invalides)
       else if (pathname.startsWith('/app/')) {
         // Probablement une route invalide, rediriger vers /app
         router.push('/app')
       }
+      
+      // Dans tous les autres cas, arrêter le loading
+      setLoading(false)
     }
 
     handleOrganizationLogic()
   }, [isAuthenticated, hasCheckedAuth, hasCheckedOrganization, currentOrganization, pathname])
-
-  // Attendre l'authentification
-  if (!hasCheckedAuth || !isAuthenticated) {
-    return (
-      <div className="flex h-screen justify-center items-center">
-        <p>Vérification de l'authentification...</p>
-      </div>
-    )
-  }
-
-  // Attendre la vérification de l'organisation
-  if (isLoading || !hasCheckedOrganization) {
-    return (
-      <div className="flex h-screen justify-center items-center">
-        <p>Chargement de l'organisation...</p>
-      </div>
-    )
-  }
-
-  // Erreur lors du chargement de l'organisation
-  if (error) {
-    return (
-      <div className="flex h-screen justify-center items-center flex-col gap-4">
-        <p className="text-red-600">Erreur: {error}</p>
-        <button 
-          onClick={() => router.push("/quicksetup")}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Configurer une organisation
-        </button>
-      </div>
-    )
-  }
-
-  // Pas d'organisation trouvée
-  if (!currentOrganization) {
-    return (
-      <div className="flex h-screen justify-center items-center">
-        <p>Redirection vers la configuration...</p>
-      </div>
-    )
-  }
 
   return <>{children}</>
 }

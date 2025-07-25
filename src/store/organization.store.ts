@@ -17,6 +17,61 @@ export interface Organization {
   userRole: "Owner" | "Admin" | "User"
 }
 
+// ! To delete
+interface CreateOrgRequest {
+  name: string
+  domain: string
+  address: string
+  language: string
+  currency: string
+}
+
+interface CreateOrgResponse {
+  statusCode: number
+  message: string
+  data?: {
+    org: {
+      id: string
+      name: string
+      createdAt: string
+      updatedAt: string
+    }
+    userRole: "Owner" | "Admin" | "User"
+  }
+  details?: {
+    message: string[]
+    error: string
+    statusCode: number
+  }
+}
+
+interface CreateOrgRequest {
+  name: string
+  domain: string
+  address: string
+  language: string
+  currency: string
+}
+
+interface CreateOrgResponse {
+  statusCode: number
+  message: string
+  data?: {
+    org: {
+      id: string
+      name: string
+      createdAt: string
+      updatedAt: string
+    }
+    userRole: "Owner" | "Admin" | "User"
+  }
+  details?: {
+    message: string[]
+    error: string
+    statusCode: number
+  }
+}
+
 interface OrganizationState {
   currentOrganization: Organization | null
   isLoading: boolean
@@ -31,8 +86,8 @@ interface OrganizationState {
   checkAndSetOrganization: () => Promise<void>
 }
 
-// API functions
-const organizationAPI = {
+// !API functions to delete
+export const organizationAPI = {
   getDefault: async (): Promise<{ data: Organization }> => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_INVOICE_URL}/organization/default`, {
       credentials: 'include'
@@ -44,6 +99,23 @@ const organizationAPI = {
 
     const data = await response.json()
     return { data }
+  },
+    createOrganization: async (data: CreateOrgRequest): Promise<CreateOrgResponse> => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_INVOICE_URL}/organizations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+    const result = await response.json()
+
+    if (!response.ok) {
+      throw result
+    }
+
+    return result
   }
 }
 

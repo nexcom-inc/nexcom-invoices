@@ -30,7 +30,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Pour les autres routes, rediriger vers /app
-  if (!pathname.startsWith('/app')) {
+  if (!pathname.startsWith('/app/')) {
     return NextResponse.redirect(new URL('/app', request.url))
   }
 
