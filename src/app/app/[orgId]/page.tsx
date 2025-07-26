@@ -12,6 +12,7 @@ export default function Dashboard() {
 
   const handleLogout = async () => {
     setLoading(true)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     await logout().catch(e=>setLoading(false));
   };
 

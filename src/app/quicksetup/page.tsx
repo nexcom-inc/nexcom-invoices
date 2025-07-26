@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client"
 
 import type React from "react"
@@ -11,7 +13,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Loader2, Building2 } from "lucide-react"
 import { organizationAPI, useOrganizationStore } from "@/store/organization.store"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { useCreateOrganization } from "@/hooks/useOrganizations"
 
 interface CreateOrgRequest {
   name: string
@@ -21,24 +22,24 @@ interface CreateOrgRequest {
   currency: string
 }
 
-interface CreateOrgResponse {
-  statusCode: number
-  message: string
-  data?: {
-    org: {
-      id: string
-      name: string
-      createdAt: string
-      updatedAt: string
-    }
-    userRole: "Owner" | "Admin" | "User"
-  }
-  details?: {
-    message: string[]
-    error: string
-    statusCode: number
-  }
-}
+// interface CreateOrgResponse {
+//   statusCode: number
+//   message: string
+//   data?: {
+//     org: {
+//       id: string
+//       name: string
+//       createdAt: string
+//       updatedAt: string
+//     }
+//     userRole: "Owner" | "Admin" | "User"
+//   }
+//   details?: {
+//     message: string[]
+//     error: string
+//     statusCode: number
+//   }
+// }
 
 const DOMAINS = ["Transport", "Commerce", "Services", "Technologie", "Santé", "Éducation", "Finance", "Autre"]
 
@@ -155,7 +156,7 @@ export default function CreateOrganizationPage() {
 
             {/* Name Field */}
             <div className="space-y-2">
-              <Label htmlFor="name">Nom de l'organisation *</Label>
+              <Label htmlFor="name">Nom de l&apos;organisation *</Label>
               <Input
                 id="name"
                 type="text"
@@ -168,7 +169,7 @@ export default function CreateOrganizationPage() {
 
             {/* Domain Field */}
             <div className="space-y-2">
-              <Label htmlFor="domain">Domaine d'activité *</Label>
+              <Label htmlFor="domain">Domaine d&apos;activité *</Label>
               <Select value={formData.domain} onValueChange={(value) => handleInputChange("domain", value)} required>
                 <SelectTrigger>
                   <SelectValue placeholder="Sélectionnez un domaine" />

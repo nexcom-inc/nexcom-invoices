@@ -18,12 +18,8 @@ export const RequireOrganization = ({ children }: RequireOrganizationProps) => {
   const { setLoadingPhase, setLoading } = useAppStore()
   const {
     currentOrganization,
-    isLoading,
-    error,
     hasCheckedOrganization,
     checkAndSetOrganization,
-    setCurrentOrganization,
-    setError
   } = useOrganizationStore()
 
   // Extraire l'orgId du pathname

@@ -1,3 +1,6 @@
+/* eslint-disable */
+
+
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import AxiosInstance from "@/lib/axios"
 import type { MailingConfig } from "@/lib/types"

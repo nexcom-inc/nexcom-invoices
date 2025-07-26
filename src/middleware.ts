@@ -16,6 +16,7 @@ export function middleware(request: NextRequest) {
   const appRouteMatch = pathname.match(/^\/app\/([^\/]+)(.*)$/)
   
   if (appRouteMatch) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [, orgId, subPath] = appRouteMatch
     
     // Ajouter l'orgId dans les headers pour l'utiliser côté client
