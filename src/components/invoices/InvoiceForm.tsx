@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Button } from '../UI/Button';
-import { LoadingSpinner } from '../UI/LoadingSpinner';
+import { Button } from '../UIB/Button';
+import { LoadingSpinner } from '../UIB/LoadingSpinner';
 import { useApi } from '../../hooks/useApi';
 import { apiService } from '../../services/api';
 import { CreateInvoiceDto, CreateInvoiceItemDto } from '../../types/api';

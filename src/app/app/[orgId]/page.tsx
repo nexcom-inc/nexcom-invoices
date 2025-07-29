@@ -1,6 +1,6 @@
 import React from 'react';
 import { FileText, Users, Package, DollarSign, TrendingUp, Calendar } from 'lucide-react';
-import { Card, CardHeader } from '@/components/UI/Card';
+import { Card, CardHeader } from '@/components/UIB/Card';
 
 export default function Dashboard() {
   const stats = [

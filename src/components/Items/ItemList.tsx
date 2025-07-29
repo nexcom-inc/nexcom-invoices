@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Card, CardHeader } from '../UI/Card';
-import { Button } from '../UI/Button';
-import { LoadingSpinner } from '../UI/LoadingSpinner';
+import { Card, CardHeader } from '../UIB/Card';
+import { Button } from '../UIB/Button';
+import { LoadingSpinner } from '../UIB/LoadingSpinner';
 import { useApi, useAsyncAction } from '../../hooks/useApi';
-import { useToast } from '../UI/Toast';
+import { useToast } from '../UIB/Toast';
 import { apiService } from '../../services/api';
 import { CreateItemDto } from '../../types/api';
 import { Package, Plus, Tag } from 'lucide-react';

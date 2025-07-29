@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Button } from '../UI/Button';
+import { Button } from '../UIB/Button';
 import { CreateTaxDto } from '../../types/api';
 
 interface TaxFormProps {

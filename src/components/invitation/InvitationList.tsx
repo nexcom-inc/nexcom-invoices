@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card, CardHeader } from "../UI/Card";
-import { Button } from "../UI/Button";
+import { Card, CardHeader } from "../UIB/Card";
+import { Button } from "../UIB/Button";
 import { useAsyncAction } from "../../hooks/useApi";
-import { useToast } from "../UI/Toast";
+import { useToast } from "../UIB/Toast";
 import { apiService } from "../../services/api";
 import { CreateInvitationDto } from "../../types/api";
 import { UserPlus, Send, Users } from "lucide-react";

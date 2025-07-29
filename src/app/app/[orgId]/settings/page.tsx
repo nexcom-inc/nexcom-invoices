@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { Settings as SettingsIcon, Key, Database, Shield, Bell, Palette } from 'lucide-react';
-import { useToast } from '@/components/UI/Toast';
-import { Button } from '@/components/UI/Button';
-import { Card } from '@/components/UI/Card';
+import { useToast } from '@/components/UIB/Toast';
+import { Button } from '@/components/UIB/Button';
+import { Card } from '@/components/UIB/Card';
 import { useOrganizationStore } from '@/store/organization.store';
 
 

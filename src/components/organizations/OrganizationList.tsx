@@ -4,7 +4,7 @@ import { apiService } from "../../services/api";
 import {  CreateOrganizationDto } from "../../types/api";
 import { Building2, Plus, MapPin, Globe, Loader2 } from "lucide-react";
 import { OrganizationForm } from "./OrganizationForm";
-import { useToast } from "../UI/Toast";
+import { useToast } from "../UIB/Toast";
 import { Button } from "../ui/button";
 import { Card, CardHeader } from "../ui/card";
 

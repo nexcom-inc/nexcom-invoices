@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../services/api';
 import { UserPlus, CheckCircle, XCircle, Building2, Mail, Shield } from 'lucide-react';
-import { useToast } from '@/components/UI/Toast';
+import { useToast } from '@/components/UIB/Toast';
 import { useAsyncAction } from '@/hooks/useApi';
-import { LoadingSpinner } from '@/components/UI/LoadingSpinner';
-import { Button } from '@/components/UI/Button';
-import { Card } from '@/components/UI/Card';
+import { LoadingSpinner } from '@/components/UIB/LoadingSpinner';
+import { Button } from '@/components/UIB/Button';
+import { Card } from '@/components/UIB/Card';
 import Logo from '@/components/app/logo';
 import { useRouter, useSearchParams } from 'next/navigation';
 
