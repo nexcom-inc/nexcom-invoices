@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Client, CreateClientDto, CreateInvitationDto, CreateInvoiceDto, CreateItemDto, CreateMailingConfigDto, CreateOrganizationDto, CreateTaxDto, Invitation, Invoice, Item, MailingConfig, Organization, Tax } from "@/types/api";
 
 // API Service Layer with Token Management

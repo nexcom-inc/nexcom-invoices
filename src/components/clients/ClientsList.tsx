@@ -7,7 +7,7 @@ import { LoadingSpinner } from '../UI/LoadingSpinner';
 import { useApi, useAsyncAction } from '../../hooks/useApi';
 import { useToast } from '../UI/Toast';
 import { apiService } from '../../services/api';
-import { Client, CreateClientDto } from '../../types/api';
+import { CreateClientDto } from '../../types/api';
 import { Users, Plus, User, Building, Mail, Phone } from 'lucide-react';
 import { ClientForm } from './ClientForm';
 import { useOrgId } from '@/hooks/organizations/useOrgId';

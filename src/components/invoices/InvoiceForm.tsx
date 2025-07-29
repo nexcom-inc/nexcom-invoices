@@ -5,7 +5,7 @@ import { Button } from '../UI/Button';
 import { LoadingSpinner } from '../UI/LoadingSpinner';
 import { useApi } from '../../hooks/useApi';
 import { apiService } from '../../services/api';
-import { CreateInvoiceDto, CreateInvoiceItemDto, Client, Item } from '../../types/api';
+import { CreateInvoiceDto, CreateInvoiceItemDto } from '../../types/api';
 import { Plus, Trash2 } from 'lucide-react';
 
 interface InvoiceFormProps {

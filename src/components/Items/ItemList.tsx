@@ -8,13 +8,10 @@ import { useApi, useAsyncAction } from '../../hooks/useApi';
 import { useToast } from '../UI/Toast';
 import { apiService } from '../../services/api';
 import { CreateItemDto } from '../../types/api';
-import { Package, Plus, DollarSign, Tag } from 'lucide-react';
+import { Package, Plus, Tag } from 'lucide-react';
 import { ItemForm } from './ItemForm';
 import { useOrgId } from '@/hooks/organizations/useOrgId';
 
-interface ItemListProps {
-  organizationId: string;
-}
 
 export function ItemList() {
   const [showCreateForm, setShowCreateForm] = useState(false);

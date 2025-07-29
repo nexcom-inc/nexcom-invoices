@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React from 'react';
 import { Bell, Search, User } from 'lucide-react';
 import { useOrganizationStore } from '@/store/organization.store';
 import { useAuthStore } from '@/lib/nexcom/auth/stores/auth-store';

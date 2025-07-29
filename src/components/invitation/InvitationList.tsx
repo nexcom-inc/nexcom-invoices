@@ -7,7 +7,7 @@ import { useAsyncAction } from "../../hooks/useApi";
 import { useToast } from "../UI/Toast";
 import { apiService } from "../../services/api";
 import { CreateInvitationDto } from "../../types/api";
-import { UserPlus, Mail, Send, Users } from "lucide-react";
+import { UserPlus, Send, Users } from "lucide-react";
 
 interface InvitationListProps {
   organizationId: string;

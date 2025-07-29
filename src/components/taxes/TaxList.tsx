@@ -7,7 +7,7 @@ import { LoadingSpinner } from '../UI/LoadingSpinner';
 import { useApi, useAsyncAction } from '../../hooks/useApi';
 import { useToast } from '../UI/Toast';
 import { apiService } from '../../services/api';
-import { Tax, CreateTaxDto } from '../../types/api';
+import { CreateTaxDto } from '../../types/api';
 import { Calculator, Plus, Percent } from 'lucide-react';
 import { TaxForm } from './TaxForm';
 

@@ -1,7 +1,6 @@
 "use client";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
-import { ToastProvider } from "@/components/UI/Toast";
 import { useAuthStore } from "@/lib/nexcom/auth/stores/auth-store";
 import { useAppStore } from "@/store/app.store";
 import { useOrganizationStore } from "@/store/organization.store";

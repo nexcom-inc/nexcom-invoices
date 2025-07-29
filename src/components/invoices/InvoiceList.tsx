@@ -12,10 +12,6 @@ import { FileText, Plus, Download, Send } from 'lucide-react';
 import { InvoiceForm } from './InvoiceForm';
 import { useOrgId } from '@/hooks/organizations/useOrgId';
 
-interface InvoiceListProps {
-  organizationId: string;
-}
-
 export function InvoiceList() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const { showSuccess } = useToast();

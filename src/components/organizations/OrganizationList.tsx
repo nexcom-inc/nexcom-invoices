@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useApi, useAsyncAction } from "../../hooks/useApi";
 import { apiService } from "../../services/api";
-import { Organization, CreateOrganizationDto } from "../../types/api";
-import { Building2, Plus, Edit, MapPin, Globe, Loader2 } from "lucide-react";
+import {  CreateOrganizationDto } from "../../types/api";
+import { Building2, Plus, MapPin, Globe, Loader2 } from "lucide-react";
 import { OrganizationForm } from "./OrganizationForm";
 import { useToast } from "../UI/Toast";
 import { Button } from "../ui/button";

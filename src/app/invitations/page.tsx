@@ -168,11 +168,11 @@ export default function AcceptInvitation() {
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome to the Team!</h2>
             <p className="text-gray-600 mb-6">
               You have successfully joined <strong>{invitationDetails?.organizationName}</strong>. 
-              You can now access the organization's invoice management system.
+              You can now access the organization&apos;s invoice management system.
             </p>
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
               <p className="text-sm text-green-700">
-                <strong>What's next?</strong>
+                <strong>What&apos;s next?</strong>
               </p>
               <ul className="text-sm text-green-600 mt-2 list-disc list-inside">
                 <li>You will be redirected to the main application</li>
@@ -215,7 +215,7 @@ export default function AcceptInvitation() {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <UserPlus className="w-8 h-8 text-blue-600" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">You're Invited!</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">You&apos;re Invited!</h2>
               <p className="text-gray-600">
                 You have been invited to join an organization on Nexcom Invoice
               </p>
@@ -264,7 +264,7 @@ export default function AcceptInvitation() {
             </div>
 
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-              <h3 className="text-sm font-medium text-blue-800 mb-2">What you'll get access to:</h3>
+              <h3 className="text-sm font-medium text-blue-800 mb-2">What you&apo;ll get access to:</h3>
               <ul className="text-sm text-blue-700 space-y-1">
                 <li>• Create and manage invoices</li>
                 <li>• Manage clients and items</li>
