@@ -13,6 +13,7 @@ interface RequireOrganizationProps {
 export const RequireOrganization = ({ children }: RequireOrganizationProps) => {
   const router = useRouter()
   const pathname = usePathname()
+  const INGORES_PATHS = ['/quicksetup', '/invitations']
   
   const { isAuthenticated, hasCheckedAuth } = useAuthStore()
   const { setLoadingPhase, setLoading } = useAppStore()
@@ -38,13 +39,13 @@ export const RequireOrganization = ({ children }: RequireOrganizationProps) => {
       setLoadingPhase('ORGANIZATION')
       const orgIdFromPath = getOrgIdFromPath(pathname)
 
-      // Cas spécial: quicksetup
-      if (pathname === "/quicksetup") {
-        await checkAndSetOrganization()
-        if (currentOrganization && currentOrganization.id) {
-          router.push(`/app/${currentOrganization.id}`)
-          return
-        }
+      // ignored paths
+      if (INGORES_PATHS.includes(pathname)) {
+        // await checkAndSetOrganization()
+        // if (currentOrganization && currentOrganization.id) {
+        //   router.push(`/app/${currentOrganization.id}`)
+        //   return
+        // }
         setLoading(false)
         return
       }

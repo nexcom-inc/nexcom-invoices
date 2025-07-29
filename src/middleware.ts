@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   
   // Pages qui n'ont pas besoin de vérification d'organisation
-  const publicPaths = ['/quicksetup']
+  const publicPaths = ['/quicksetup', '/invitations']
   const isPublicPath = publicPaths.some(path => pathname.startsWith(path))
   
   if (isPublicPath) {
