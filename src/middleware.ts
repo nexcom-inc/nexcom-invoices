@@ -1,8 +1,18 @@
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
+import { AUTH_TOKEN_KEY, LOGIN_URL } from "./constants"
+
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+
+  const cookies = request.cookies
+  
+  if (!cookies.has(AUTH_TOKEN_KEY)) {
+    console.log('No access token found');
+    
+    return NextResponse.redirect(LOGIN_URL)
+  }
   
   // Pages qui n'ont pas besoin de vérification d'organisation
   const publicPaths = ['/quicksetup', '/invitations']

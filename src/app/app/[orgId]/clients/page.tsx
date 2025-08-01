@@ -1,10 +1,10 @@
-import { ClientList } from '@/components/clients/ClientsList'
+import ClientList from '@/features/clients/components/clientList'
 import React from 'react'
 
-const ClientsPage = () => {
+const CLients = () => {
   return (
-    <ClientList />
+   <ClientList />
   )
 }
 
-export default ClientsPage
+export default CLients
